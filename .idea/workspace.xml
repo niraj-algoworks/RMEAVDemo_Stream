@@ -48,6 +48,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1b8ydgvch54WIrRYa2MxSqmfoRa" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -428,42 +431,50 @@
       <screen x="0" y="23" width="1440" height="823" />
     </state>
     <state x="483" y="145" key="#xdebugger.evaluate/0.23.1440.823@0.23.1440.823" timestamp="1623146771657" />
-    <state width="1398" height="167" key="GridCell.Tab.0.bottom" timestamp="1623148640526">
+    <state x="578" y="338" key="Github.ShareDialog" timestamp="1623149319606">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
-    <state width="1398" height="167" key="GridCell.Tab.0.bottom/0.23.1440.823@0.23.1440.823" timestamp="1623148640526" />
+    <state x="578" y="338" key="Github.ShareDialog/0.23.1440.823@0.23.1440.823" timestamp="1623149319606" />
+    <state x="385" y="139" key="Github.UntrackedFilesDialog" timestamp="1623149331232">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state x="385" y="139" key="Github.UntrackedFilesDialog/0.23.1440.823@0.23.1440.823" timestamp="1623149331232" />
+    <state width="1398" height="215" key="GridCell.Tab.0.bottom" timestamp="1623149282341">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state width="1398" height="215" key="GridCell.Tab.0.bottom/0.23.1440.823@0.23.1440.823" timestamp="1623149282341" />
     <state width="1311" height="432" key="GridCell.Tab.0.bottom/0.27.1812.992@0.27.1812.992" timestamp="1619549237565" />
-    <state width="1398" height="167" key="GridCell.Tab.0.center" timestamp="1623148640526">
+    <state width="1398" height="215" key="GridCell.Tab.0.center" timestamp="1623149282340">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
-    <state width="1398" height="167" key="GridCell.Tab.0.center/0.23.1440.823@0.23.1440.823" timestamp="1623148640526" />
+    <state width="1398" height="215" key="GridCell.Tab.0.center/0.23.1440.823@0.23.1440.823" timestamp="1623149282340" />
     <state width="1311" height="432" key="GridCell.Tab.0.center/0.27.1812.992@0.27.1812.992" timestamp="1619549237564" />
-    <state width="1398" height="167" key="GridCell.Tab.0.left" timestamp="1623148640525">
+    <state width="1398" height="215" key="GridCell.Tab.0.left" timestamp="1623149282339">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
-    <state width="1398" height="167" key="GridCell.Tab.0.left/0.23.1440.823@0.23.1440.823" timestamp="1623148640525" />
+    <state width="1398" height="215" key="GridCell.Tab.0.left/0.23.1440.823@0.23.1440.823" timestamp="1623149282339" />
     <state width="1311" height="432" key="GridCell.Tab.0.left/0.27.1812.992@0.27.1812.992" timestamp="1619549237564" />
-    <state width="1398" height="167" key="GridCell.Tab.0.right" timestamp="1623148640526">
+    <state width="1398" height="215" key="GridCell.Tab.0.right" timestamp="1623149282340">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
-    <state width="1398" height="167" key="GridCell.Tab.0.right/0.23.1440.823@0.23.1440.823" timestamp="1623148640526" />
+    <state width="1398" height="215" key="GridCell.Tab.0.right/0.23.1440.823@0.23.1440.823" timestamp="1623149282340" />
     <state width="1311" height="432" key="GridCell.Tab.0.right/0.27.1812.992@0.27.1812.992" timestamp="1619549237565" />
-    <state width="1398" height="213" key="GridCell.Tab.1.bottom" timestamp="1623147606801">
+    <state width="1398" height="213" key="GridCell.Tab.1.bottom" timestamp="1623149253594">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
-    <state width="1398" height="213" key="GridCell.Tab.1.bottom/0.23.1440.823@0.23.1440.823" timestamp="1623147606801" />
-    <state width="1398" height="213" key="GridCell.Tab.1.center" timestamp="1623147606800">
+    <state width="1398" height="213" key="GridCell.Tab.1.bottom/0.23.1440.823@0.23.1440.823" timestamp="1623149253594" />
+    <state width="1398" height="213" key="GridCell.Tab.1.center" timestamp="1623149253593">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
-    <state width="1398" height="213" key="GridCell.Tab.1.center/0.23.1440.823@0.23.1440.823" timestamp="1623147606800" />
-    <state width="1398" height="213" key="GridCell.Tab.1.left" timestamp="1623147606800">
+    <state width="1398" height="213" key="GridCell.Tab.1.center/0.23.1440.823@0.23.1440.823" timestamp="1623149253593" />
+    <state width="1398" height="213" key="GridCell.Tab.1.left" timestamp="1623149253593">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
-    <state width="1398" height="213" key="GridCell.Tab.1.left/0.23.1440.823@0.23.1440.823" timestamp="1623147606800" />
-    <state width="1398" height="213" key="GridCell.Tab.1.right" timestamp="1623147606801">
+    <state width="1398" height="213" key="GridCell.Tab.1.left/0.23.1440.823@0.23.1440.823" timestamp="1623149253593" />
+    <state width="1398" height="213" key="GridCell.Tab.1.right" timestamp="1623149253593">
       <screen x="0" y="23" width="1440" height="823" />
     </state>
-    <state width="1398" height="213" key="GridCell.Tab.1.right/0.23.1440.823@0.23.1440.823" timestamp="1623147606801" />
+    <state width="1398" height="213" key="GridCell.Tab.1.right/0.23.1440.823@0.23.1440.823" timestamp="1623149253593" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -505,53 +516,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java</url>
-          <line>184</line>
-          <option name="timeStamp" value="18" />
+          <line>233</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java</url>
-          <line>187</line>
-          <option name="timeStamp" value="19" />
+          <line>234</line>
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java</url>
-          <line>189</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java</url>
-          <line>199</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java</url>
-          <line>204</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java</url>
-          <line>205</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java</url>
-          <line>208</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java</url>
-          <line>219</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java</url>
-          <line>226</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java</url>
-          <line>225</line>
-          <option name="timeStamp" value="27" />
+          <line>237</line>
+          <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
