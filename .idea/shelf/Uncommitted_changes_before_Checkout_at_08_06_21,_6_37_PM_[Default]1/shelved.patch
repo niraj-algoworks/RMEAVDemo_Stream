@@ -1,0 +1,369 @@
+Index: app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// This header may not be removed.  It should accompany all source code\n// derived from this code in any form or fashion.\n// Filename: RMEAVAudio.java\n// Author: Homayoon Beigi <beigi@recotechnologies.com>\n// Copyright (c) 2003-2020 Recognition Technologies, Inc.\n// Date: October 27, 2020\n// This code may be used as is and may not be distributed or copied without the\n// explicit knowledge and permission of the author or Recognition Technologies, Inc.\n\npackage com.recotechnologies.rmeavdemo;\n\nimport android.media.AudioFormat;\nimport android.media.AudioRecord;\nimport android.media.MediaRecorder;\nimport android.os.Process;\nimport android.util.Log;\n\nimport com.recotechnologies.rmeavapi.RMEAudio;\nimport com.recotechnologies.rmeavapi.RMEAudioEventListener;\nimport com.recotechnologies.rmeavapi.RMEAudioUtils;\n\nimport java.io.ByteArrayOutputStream;\nimport java.io.File;\nimport java.io.FileOutputStream;\nimport java.io.IOException;\n\nimport static android.media.AudioFormat.CHANNEL_IN_STEREO;\n\npublic class RMEAudioAndroid extends RMEAudio {\n\n  protected RMEAudioEventListener m_sAudioEventListener;\n  protected int m_iRecordingInProgress = 0;\n\n  public int m_iSaveLocalAudio = 0;\n\n  //NEW AUDIO\n  protected int m_iBufferSize;\n  protected int m_iSamplingRate = 16000;\n  protected int m_iISCDebug = 0;\n\n  protected static final int MIN_BUFFER_SIZE_MS = 1000;\n  protected AudioRecord m_sAudioRecord = null;\n  protected Thread m_sAudioThread = null;\n\n   protected static final int CHANNELS = AudioFormat.CHANNEL_IN_STEREO;\n  //protected static final int CHANNELS = AudioFormat.CHANNEL_IN_MONO;\n  protected static final int ENCODING = AudioFormat.ENCODING_PCM_16BIT;\n  //protected static final int SOURCE = MediaRecorder.AudioSource.MIC;\n  //protected static final int SOURCE = MediaRecorder.AudioSource.UNPROCESSED;\n  //protected static final int SOURCE = MediaRecorder.AudioSource.VOICE_COMMUNICATION;\n  protected static final int SOURCE = MediaRecorder.AudioSource.VOICE_RECOGNITION;\n\n\n  public RMEAudioAndroid(RMEAudioEventListener sAudioEventListener, int iISCDebug) {\n    super(sAudioEventListener,iISCDebug);\n     this.m_sAudioEventListener=sAudioEventListener;\n     this.m_iISCDebug=iISCDebug;\n  }\n\n  public void StartAudio(int iSamplingRate, long hAVEngineHandle) {\n    m_iSamplingRate = iSamplingRate;\n\n    double minBufferSize = (double) m_iSamplingRate * MIN_BUFFER_SIZE_MS / 1000;\n\n    m_iBufferSize = AudioRecord.getMinBufferSize(m_iSamplingRate, CHANNELS, ENCODING);\n\n    if (m_iBufferSize < minBufferSize)\n      m_iBufferSize = m_iBufferSize * (int) Math.ceil(minBufferSize / m_iBufferSize);\n\n    m_iSamplingRate = iSamplingRate;\n\n    if (m_iISCDebug > 1)\n      Log.d(m_strClassTag, String.format(\"m_iBufferSize = %d (%.3f seconds)\",\n              m_iBufferSize, (double) m_iBufferSize / iSamplingRate));\n\n    //    m_sAudioRecord = new AudioRecord(SOURCE, m_iSamplingRate, CHANNELS, ENCODING, m_iBufferSize);\n    m_sAudioRecord = new AudioRecord.Builder()\n            .setAudioSource(SOURCE)\n            .setAudioFormat(new AudioFormat.Builder()\n                    .setEncoding(ENCODING)\n                    .setChannelMask(CHANNEL_IN_STEREO)\n                    .setSampleRate(m_iSamplingRate)\n                    .build())\n            .setBufferSizeInBytes(m_iBufferSize)\n            .build();\n\n    if (m_sAudioRecord == null || m_sAudioRecord.getState() != AudioRecord.STATE_INITIALIZED)\n    {\n      Log.e(m_strClassTag, \"Could not initialize audio device at \" + m_iSamplingRate + \" Hz.\");\n      m_sAudioRecord = null;\n    }\n\n    m_iRecordingInProgress = 1;\n    if (m_sAudioEventListener==null){\n        Log.e(m_strClassTag + \"95\",\"audio event listener null\");\n        return;\n    }\n    m_sAudioEventListener.SetRecordingInProgress(hAVEngineHandle, m_iRecordingInProgress);\n    if (m_iISCDebug > 1)\n      Log.d(m_strClassTag, \"AudioThread\");\n    m_sAudioThread = new Thread(new AudioRunnable(hAVEngineHandle), \"AudioThread\");\n    m_sAudioThread.start();\n  }\n\n\n  public void StopAudio(long hAVEngineHandle) {\n    if (m_iISCDebug > 1)\n      Log.d(m_strClassTag, \"RMEAudio::StopAudio: Called\");\n    if (m_sAudioThread != null && m_sAudioThread.isAlive())\n    {\n      if (m_iISCDebug > 1)\n        Log.d(m_strClassTag, \"THREAD NOT NULL AND IS ALIVE\");\n      if (m_iISCDebug > 1)\n        Log.d(m_strClassTag, \"Stopping audio thread.\");\n\n      m_iRecordingInProgress = 0;\n      if (m_sAudioEventListener==null){\n        Log.e(m_strClassTag + \"118\",\"audio event listener null\");\n        return;\n      }\n      m_sAudioEventListener.SetRecordingInProgress(hAVEngineHandle, m_iRecordingInProgress);\n\n      try\n      {\n        if (m_iISCDebug > 1)\n          Log.d(m_strClassTag, \"THREAD TRY KILL\");\n        m_sAudioThread.join();\n        m_sAudioThread = null;\n\n        if (m_sAudioRecord != null)\n        {\n          if (m_iISCDebug > 1)\n            Log.d(m_strClassTag, \"RMEAudio::StopAudio: Calling m_sAudioRecord.stop()\");\n          m_sAudioRecord.stop();\n          m_sAudioRecord.release();\n        }\n      }\n      catch (InterruptedException e)\n      {\n        Log.e(m_strClassTag, \"\" + e);\n      }\n    }\n  }\n\n\n  protected class AudioRunnable implements Runnable {\n    protected long m_hAVEngineHandle = 0;\n\n    public AudioRunnable(long hAVEngineHandle) {\n      this.m_hAVEngineHandle = hAVEngineHandle;\n    } // AudioRunnable\n\n    public long EngineHandle() {\n      return m_hAVEngineHandle;\n    }\n\n    @Override\n    public void run() {\n      if (m_iISCDebug > 1)\n        Log.d(m_strClassTag, \"AudioRunnable:  Inside run\");\n\n      Process.setThreadPriority(Process.THREAD_PRIORITY_URGENT_AUDIO);\n\n      try\n      {\n        m_sAudioRecord.startRecording();\n      } catch (IllegalStateException e) {\n        Log.e(m_strClassTag, e.toString());\n      }\n\n      //      final int BufferElements2Rec_VAD = 480;\n      final int BufferElements2Rec_VAD = 4000;\n      short sData[] = new short[BufferElements2Rec_VAD];\n      ByteArrayOutputStream baos = new ByteArrayOutputStream();\n      int iCount = 0;\n      int iSerialNum=0;\n\n      while (m_iRecordingInProgress == 1) {\n        if (m_iISCDebug > 1)\n          Log.d(\"AudioThread::run\", \"Recording is in Progress\");\n\n        iCount++;\n        int result = m_sAudioRecord.read(sData, 0, BufferElements2Rec_VAD);\n        if (result < 0) {\n          throw new RuntimeException(\"Reading of audio buffer failed: \" +\n                  getBufferReadFailureReason(result));\n        }\n\n        try {\n          short[] mCopyData=new short[sData.length/2];\n          for (int i=0;i<mCopyData.length;++i){\n            mCopyData[i]=sData[i*2];\n          }\n\n          byte byData[] = RMEAudioUtils.short2byte(mCopyData);\n\n          if (m_iSaveLocalAudio > 0) {\n            // kept incase we want to record audio locally to debug\n            //        final File file = new File(Environment.getExternalStorageDirectory(), \"recording.pcm\");\n            final File file = new File(\"/sdcard/rmeroot/data/rmespch/media\", \"recording.pcm\");\n            try (final FileOutputStream outStream = new FileOutputStream(file, true)) {\n              if (m_iISCDebug > 1)\n                Log.d(\"AudioThread::run:\", \"\" + byData.length);\n              outStream.write(byData);\n            }\n            catch (IOException e) {\n              Log.e(m_strClassTag, \"\"+e);\n            }\n          }\n\n          if (m_sAudioEventListener==null){\n            Log.e(m_strClassTag + \"219\",\"audio event listener null\");\n            return;\n          }\n          int iResult = m_sAudioEventListener.AVEnginePushPCMAudioDataByteArray(EngineHandle(),\n                  byData,\n                  sData.length,\n                  iSerialNum,\n                  \"\");\n        }\n        catch (Exception e) {\n          Log.e(m_strClassTag, \"\" + e);\n        }\n\n/*\n        if (iCount % 12 == 0)\n        {\n          m_sAudioEventListener.AVEngineCompletePCMAudio(EngineHandle(), iSerialNum);\n          iSerialNum++;\n        }\n*/\n      }\n\n      if (m_sAudioEventListener==null){\n        Log.e(m_strClassTag + \"236\",\"audio event listener null\");\n        return;\n      }\n      m_sAudioEventListener.AVEngineCompletePCMAudio(EngineHandle(), iSerialNum);\n      iSerialNum++;\n    }\n\n    protected String getBufferReadFailureReason(int errorCode)\n    {\n      switch (errorCode)\n      {\n        case AudioRecord.ERROR_INVALID_OPERATION:\n          return \"ERROR_INVALID_OPERATION\";\n        case AudioRecord.ERROR_BAD_VALUE:\n          return \"ERROR_BAD_VALUE\";\n        case AudioRecord.ERROR_DEAD_OBJECT:\n          return \"ERROR_DEAD_OBJECT\";\n        case AudioRecord.ERROR:\n          return \"ERROR\";\n        default:\n          return \"Unknown (\" + errorCode + \")\";\n      }\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java	(revision 11a7f68db9934075a7d74574dd73da8a842014a7)
++++ app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioAndroid.java	(date 1623155370258)
+@@ -28,7 +28,6 @@
+ 
+ public class RMEAudioAndroid extends RMEAudio {
+ 
+-  protected RMEAudioEventListener m_sAudioEventListener;
+   protected int m_iRecordingInProgress = 0;
+ 
+   public int m_iSaveLocalAudio = 0;
+@@ -53,8 +52,6 @@
+ 
+   public RMEAudioAndroid(RMEAudioEventListener sAudioEventListener, int iISCDebug) {
+     super(sAudioEventListener,iISCDebug);
+-     this.m_sAudioEventListener=sAudioEventListener;
+-     this.m_iISCDebug=iISCDebug;
+   }
+ 
+   public void StartAudio(int iSamplingRate, long hAVEngineHandle) {
+@@ -91,10 +88,6 @@
+     }
+ 
+     m_iRecordingInProgress = 1;
+-    if (m_sAudioEventListener==null){
+-        Log.e(m_strClassTag + "95","audio event listener null");
+-        return;
+-    }
+     m_sAudioEventListener.SetRecordingInProgress(hAVEngineHandle, m_iRecordingInProgress);
+     if (m_iISCDebug > 1)
+       Log.d(m_strClassTag, "AudioThread");
+@@ -114,10 +107,6 @@
+         Log.d(m_strClassTag, "Stopping audio thread.");
+ 
+       m_iRecordingInProgress = 0;
+-      if (m_sAudioEventListener==null){
+-        Log.e(m_strClassTag + "118","audio event listener null");
+-        return;
+-      }
+       m_sAudioEventListener.SetRecordingInProgress(hAVEngineHandle, m_iRecordingInProgress);
+ 
+       try
+@@ -188,6 +177,7 @@
+ 
+         try {
+           short[] mCopyData=new short[sData.length/2];
++
+           for (int i=0;i<mCopyData.length;++i){
+             mCopyData[i]=sData[i*2];
+           }
+@@ -208,15 +198,12 @@
+             }
+           }
+ 
+-          if (m_sAudioEventListener==null){
+-            Log.e(m_strClassTag + "219","audio event listener null");
+-            return;
+-          }
+           int iResult = m_sAudioEventListener.AVEnginePushPCMAudioDataByteArray(EngineHandle(),
+                   byData,
+                   sData.length,
+                   iSerialNum,
+                   "");
++          Log.e(m_strClassTag,"iResult : " + iResult);
+         }
+         catch (Exception e) {
+           Log.e(m_strClassTag, "" + e);
+@@ -231,10 +218,10 @@
+ */
+       }
+ 
+-      if (m_sAudioEventListener==null){
+-        Log.e(m_strClassTag + "236","audio event listener null");
+-        return;
+-      }
++
++        Log.e(m_strClassTag + "236"," m_sAudioEventListener " + m_sAudioEventListener);
++
++
+       m_sAudioEventListener.AVEngineCompletePCMAudio(EngineHandle(), iSerialNum);
+       iSerialNum++;
+     }
+Index: app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudio.java
+===================================================================
+--- app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudio.java	(revision 11a7f68db9934075a7d74574dd73da8a842014a7)
++++ app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudio.java	(revision 11a7f68db9934075a7d74574dd73da8a842014a7)
+@@ -1,252 +0,0 @@
+-// This header may not be removed.  It should accompany all source code
+-// derived from this code in any form or fashion.
+-// Filename: RMEAVAudio.java
+-// Author: Homayoon Beigi <beigi@recotechnologies.com>
+-// Copyright (c) 2003-2020 Recognition Technologies, Inc.
+-// Date: October 27, 2020
+-// This code may be used as is and may not be distributed or copied without the
+-// explicit knowledge and permission of the author or Recognition Technologies, Inc.
+-
+-package com.recotechnologies.rmeavdemo;
+-
+-
+-import android.media.AudioFormat;
+-import android.media.AudioRecord;
+-import android.media.MediaRecorder;
+-import android.os.Process;
+-import android.util.Log;
+-
+-import com.recotechnologies.rmeavapi.RMEAudioEventListener;
+-import com.recotechnologies.rmeavapi.RMEAudioUtils;
+-
+-import java.io.ByteArrayOutputStream;
+-import java.io.File;
+-import java.io.FileOutputStream;
+-import java.io.IOException;
+-
+-public class RMEAudio {
+-
+-  protected final String m_strClassTag = "RMEAudio";
+-  protected RMEAudioEventListener m_sAudioEventListener;
+-  protected int m_iRecordingInProgress = 0;
+-
+-  public int m_iSaveLocalAudio = 0;
+-
+-  //NEW AUDIO
+-  protected int m_iBufferSize;
+-  protected int m_iSamplingRate = 16000;
+-  protected int m_iISCDebug = 0;
+-
+-  protected static final int MIN_BUFFER_SIZE_MS = 1000;
+-  protected AudioRecord m_sAudioRecord = null;
+-  protected Thread m_sAudioThread = null;
+-
+-  // protected static final int CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
+-  protected static final int CHANNELS = AudioFormat.CHANNEL_IN_MONO;
+-  protected static final int ENCODING = AudioFormat.ENCODING_PCM_16BIT;
+-  //protected static final int SOURCE = MediaRecorder.AudioSource.MIC;
+-  //protected static final int SOURCE = MediaRecorder.AudioSource.UNPROCESSED;
+-  //protected static final int SOURCE = MediaRecorder.AudioSource.VOICE_COMMUNICATION;
+-  protected static final int SOURCE = MediaRecorder.AudioSource.VOICE_RECOGNITION;
+-
+-  public RMEAudio(RMEAudioEventListener sAudioEventListener,
+-                  int iISCDebug)
+-  {
+-    m_iISCDebug = iISCDebug;
+-    m_sAudioEventListener = sAudioEventListener;
+-
+-    return;
+-  }
+-
+-  public void StartAudio(int iSamplingRate, long hAVEngineHandle) {
+-    m_iSamplingRate = iSamplingRate;
+-    
+-    double minBufferSize = (double) m_iSamplingRate * MIN_BUFFER_SIZE_MS / 1000;
+-
+-    m_iBufferSize = AudioRecord.getMinBufferSize(m_iSamplingRate, CHANNELS, ENCODING);
+-
+-    if (m_iBufferSize < minBufferSize)
+-      m_iBufferSize = m_iBufferSize * (int) Math.ceil(minBufferSize / m_iBufferSize);
+-
+-    m_iSamplingRate = iSamplingRate;
+-
+-    if (m_iISCDebug > 1)
+-      Log.d(m_strClassTag, String.format("m_iBufferSize = %d (%.3f seconds)",
+-            m_iBufferSize, (double) m_iBufferSize / iSamplingRate));
+-
+-    //    m_sAudioRecord = new AudioRecord(SOURCE, m_iSamplingRate, CHANNELS, ENCODING, m_iBufferSize);
+-    m_sAudioRecord = new AudioRecord.Builder()
+-      .setAudioSource(SOURCE)
+-      .setAudioFormat(new AudioFormat.Builder()
+-                      .setEncoding(ENCODING)
+-                      .setSampleRate(m_iSamplingRate)
+-                      .build())
+-      .setBufferSizeInBytes(m_iBufferSize)
+-      .build();
+-    
+-    if (m_sAudioRecord == null || m_sAudioRecord.getState() != AudioRecord.STATE_INITIALIZED)
+-    {
+-      Log.e(m_strClassTag, "Could not initialize audio device at " + m_iSamplingRate + " Hz.");
+-      m_sAudioRecord = null;
+-    }
+-
+-    m_iRecordingInProgress = 1;
+-    m_sAudioEventListener.SetRecordingInProgress(hAVEngineHandle,
+-                                                 m_iRecordingInProgress);
+-    if (m_iISCDebug > 1)
+-      Log.d(m_strClassTag, "AudioThread");
+-    m_sAudioThread = new Thread(new AudioRunnable(hAVEngineHandle), "AudioThread");
+-    m_sAudioThread.start();
+-  }
+-
+-
+-  public void StopAudio(long hAVEngineHandle) {
+-    if (m_iISCDebug > 1)
+-      Log.d(m_strClassTag, "RMEAudio::StopAudio: Called");
+-    if (m_sAudioThread != null && m_sAudioThread.isAlive())
+-    {
+-      if (m_iISCDebug > 1)
+-        Log.d(m_strClassTag, "THREAD NOT NULL AND IS ALIVE");
+-      if (m_iISCDebug > 1)
+-        Log.d(m_strClassTag, "Stopping audio thread.");
+-
+-      m_iRecordingInProgress = 0;
+-      m_sAudioEventListener.SetRecordingInProgress(hAVEngineHandle,
+-                                                   m_iRecordingInProgress);
+-
+-      try
+-      {
+-        if (m_iISCDebug > 1)
+-          Log.d(m_strClassTag, "THREAD TRY KILL");
+-        m_sAudioThread.join();
+-        m_sAudioThread = null;
+-
+-        if (m_sAudioRecord != null)
+-        {
+-          if (m_iISCDebug > 1)
+-            Log.d(m_strClassTag, "RMEAudio::StopAudio: Calling m_sAudioRecord.stop()");
+-          m_sAudioRecord.stop();
+-          m_sAudioRecord.release();
+-        }
+-      }
+-      catch (InterruptedException e)
+-      {
+-        Log.e(m_strClassTag, "" + e);
+-      }
+-    }
+-  }
+-
+-
+-  protected class AudioRunnable implements Runnable {
+-    protected long m_hAVEngineHandle = 0;
+-
+-    public AudioRunnable(long hAVEngineHandle)
+-    {
+-      this.m_hAVEngineHandle = hAVEngineHandle;
+-    } // AudioRunnable
+-
+-    public long EngineHandle()
+-    {
+-      return m_hAVEngineHandle;
+-    }
+-
+-    @Override
+-    public void run()
+-    {
+-      if (m_iISCDebug > 1)
+-        Log.d(m_strClassTag, "AudioRunnable:  Inside run");
+-
+-      Process.setThreadPriority(Process.THREAD_PRIORITY_URGENT_AUDIO);
+-
+-      try
+-      {
+-        m_sAudioRecord.startRecording();
+-      }
+-      catch (IllegalStateException e)
+-      {
+-        Log.e(m_strClassTag, e.toString());
+-      }
+-
+-      //      final int BufferElements2Rec_VAD = 480;
+-      final int BufferElements2Rec_VAD = 4000;
+-      short sData[] = new short[BufferElements2Rec_VAD];
+-      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+-      int iCount = 0;
+-      int iSerialNum=0;
+-      while (m_iRecordingInProgress == 1)
+-      {
+-        if (m_iISCDebug > 1)
+-          Log.d("AudioThread::run", "Recording is in Progress");
+-        
+-        iCount++;
+-        int result = m_sAudioRecord.read(sData, 0, BufferElements2Rec_VAD);
+-        if (result < 0)
+-        {
+-          throw new RuntimeException("Reading of audio buffer failed: " +
+-                                     getBufferReadFailureReason(result));
+-        }
+-
+-        try
+-        {
+-          byte byData[] = RMEAudioUtils.short2byte(sData);
+-
+-          if (m_iSaveLocalAudio > 0)
+-          {
+-            // kept incase we want to record audio locally to debug
+-            //        final File file = new File(Environment.getExternalStorageDirectory(), "recording.pcm");
+-            final File file = new File("/sdcard/rmeroot/data/rmespch/media", "recording.pcm");
+-            try (final FileOutputStream outStream = new FileOutputStream(file, true))
+-            {
+-              if (m_iISCDebug > 1)
+-                Log.d("AudioThread::run:", "" + byData.length);
+-              outStream.write(byData);
+-            }
+-            catch (IOException e)
+-            {
+-              Log.e(m_strClassTag, ""+e);
+-            }
+-          }
+-
+-          int iResult = m_sAudioEventListener.AVEnginePushPCMAudioDataByteArray(EngineHandle(),
+-                                                                                byData,
+-                                                                                sData.length,
+-                                                                                iSerialNum,
+-                                                                                "");
+-        }
+-        catch (Exception e)
+-        {
+-          Log.e(m_strClassTag, "" + e);
+-        }
+-
+-/*
+-        if (iCount % 12 == 0)
+-        {
+-          m_sAudioEventListener.AVEngineCompletePCMAudio(EngineHandle(), iSerialNum);
+-          iSerialNum++;
+-        }
+-*/
+-      }
+-      m_sAudioEventListener.AVEngineCompletePCMAudio(EngineHandle(), iSerialNum);
+-      iSerialNum++;
+-    }
+-
+-    protected String getBufferReadFailureReason(int errorCode)
+-    {
+-      switch (errorCode)
+-      {
+-        case AudioRecord.ERROR_INVALID_OPERATION:
+-          return "ERROR_INVALID_OPERATION";
+-        case AudioRecord.ERROR_BAD_VALUE:
+-          return "ERROR_BAD_VALUE";
+-        case AudioRecord.ERROR_DEAD_OBJECT:
+-          return "ERROR_DEAD_OBJECT";
+-        case AudioRecord.ERROR:
+-          return "ERROR";
+-        default:
+-          return "Unknown (" + errorCode + ")";
+-      }
+-    }
+-  }
+-
+-}
+-
+Index: app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioEventListener.java
+===================================================================
+--- app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioEventListener.java	(revision 11a7f68db9934075a7d74574dd73da8a842014a7)
++++ app/src/main/java/com/recotechnologies/rmeavdemo/RMEAudioEventListener.java	(revision 11a7f68db9934075a7d74574dd73da8a842014a7)
+@@ -1,19 +0,0 @@
+-package com.recotechnologies.rmeavdemo;
+-
+-public interface RMEAudioEventListener
+-{
+-  int AVEnginePushPCMAudioDataByteArray(long hAVEngineHandle,
+-                                        byte[] abMedia,
+-                                        int iNumSample,
+-                                        int iSerialNum,
+-                                        String strJSONMetaData);
+-
+-  int AVEngineCompletePCMAudio(long hAVEngineHandle,
+-                               int iSerialNum);
+-
+-  // 0 -- not in progress
+-  // 1 -- in progress
+-  // 2 -- completed
+-  int SetRecordingInProgress(long hAVEngineHandle,
+-                             int iRecordingInProgress);
+-}

@@ -28,7 +28,6 @@ import static android.media.AudioFormat.CHANNEL_IN_STEREO;
 
 public class RMEAudioAndroid extends RMEAudio {
 
-  protected RMEAudioEventListener m_sAudioEventListener;
   protected int m_iRecordingInProgress = 0;
 
   public int m_iSaveLocalAudio = 0;
@@ -53,8 +52,6 @@ public class RMEAudioAndroid extends RMEAudio {
 
   public RMEAudioAndroid(RMEAudioEventListener sAudioEventListener, int iISCDebug) {
     super(sAudioEventListener,iISCDebug);
-     this.m_sAudioEventListener=sAudioEventListener;
-     this.m_iISCDebug=iISCDebug;
   }
 
   public void StartAudio(int iSamplingRate, long hAVEngineHandle) {
@@ -91,10 +88,6 @@ public class RMEAudioAndroid extends RMEAudio {
     }
 
     m_iRecordingInProgress = 1;
-    if (m_sAudioEventListener==null){
-        Log.e(m_strClassTag + "95","audio event listener null");
-        return;
-    }
     m_sAudioEventListener.SetRecordingInProgress(hAVEngineHandle, m_iRecordingInProgress);
     if (m_iISCDebug > 1)
       Log.d(m_strClassTag, "AudioThread");
@@ -114,10 +107,6 @@ public class RMEAudioAndroid extends RMEAudio {
         Log.d(m_strClassTag, "Stopping audio thread.");
 
       m_iRecordingInProgress = 0;
-      if (m_sAudioEventListener==null){
-        Log.e(m_strClassTag + "118","audio event listener null");
-        return;
-      }
       m_sAudioEventListener.SetRecordingInProgress(hAVEngineHandle, m_iRecordingInProgress);
 
       try
@@ -188,6 +177,7 @@ public class RMEAudioAndroid extends RMEAudio {
 
         try {
           short[] mCopyData=new short[sData.length/2];
+
           for (int i=0;i<mCopyData.length;++i){
             mCopyData[i]=sData[i*2];
           }
@@ -208,15 +198,12 @@ public class RMEAudioAndroid extends RMEAudio {
             }
           }
 
-          if (m_sAudioEventListener==null){
-            Log.e(m_strClassTag + "219","audio event listener null");
-            return;
-          }
           int iResult = m_sAudioEventListener.AVEnginePushPCMAudioDataByteArray(EngineHandle(),
                   byData,
                   sData.length,
                   iSerialNum,
                   "");
+          Log.e(m_strClassTag,"iResult : " + iResult);
         }
         catch (Exception e) {
           Log.e(m_strClassTag, "" + e);
@@ -231,10 +218,10 @@ public class RMEAudioAndroid extends RMEAudio {
 */
       }
 
-      if (m_sAudioEventListener==null){
-        Log.e(m_strClassTag + "236","audio event listener null");
-        return;
-      }
+
+        Log.e(m_strClassTag + "236"," m_sAudioEventListener " + m_sAudioEventListener);
+
+
       m_sAudioEventListener.AVEngineCompletePCMAudio(EngineHandle(), iSerialNum);
       iSerialNum++;
     }
