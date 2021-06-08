@@ -1,0 +1,675 @@
+<resources>
+    <string name="app_name">RMEAVDemo</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="take_a_photo">take a photo</string>
+    <string name="select_image">select image</string>
+    <string name="btnAction">START</string>
+    <string name="btnStop">STOP</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <string name="action_speaker_enroll">Speaker Enrollment</string>
+    <string name="action_about">About</string>
+
+    <!-- Camera String Resources -->
+
+    <string name="cameraIntroduction">
+        <![CDATA[
+            Camera
+        ]]>
+    </string>
+      
+    <string name="cameraCaptureImage">Capture</string>
+    <string name="cameraInformation">Information</string>
+    <string name="cameraPermission">Camera permission is needed!</string>
+    <string name="cameraError">No Support for the Camera2 API.</string>
+
+
+    <string name="pref_ListCameraLensDirection">Camera Direction</string>
+    <string name="pref_ListCameraLensDirection_dialog_title">Camera Direction</string>
+    <string name="pref_ListCameraLensDirection_default_value">front</string>
+    <string name="pref_ListCameraLensDirection_summary">Camera Direction: %s</string>
+
+    <string-array name="pref_ListCameraLensDirection_entries">
+        <item>Front</item>
+        <item>Back (Rear)</item>
+        <item>External</item>
+    </string-array>
+
+
+    <string-array name="pref_ListCameraLensDirection_entry_values">
+        <item>front</item>
+        <item>back</item>
+        <item>external</item>
+    </string-array>
+
+    <!-- Settings Resources -->
+    <string name="pref_CategoryEngine">Main Engine Settings</string>
+    <string name="pref_CategoryEngineCommonAudio">Common Audio Settings</string>
+    <string name="pref_CategoryEngineEmbedded">Embedded Engine Settings</string>
+    <string name="pref_CategoryEngineClientServer">Client/Server Settings</string>
+
+    <string name="pref_SwitchEmbeddedEngine">Embedded Engine</string>
+    <string name="pref_SwitchEmbeddedEngine_summary">
+      If you choose Embedded Engine, everything runs on this device.
+      Otherwise, a client will be used to connect to a server.
+    </string>
+
+    <string name="pref_SeekBarRMESpchWeight">pref_SeekBarRMESpchWeight</string>
+    <string name="pref_SeekBarRMESpchWeight_summary">Speech Weight</string>
+    <string name="pref_SeekBarRMESpchWeight_min">0</string>
+    <string name="pref_SeekBarRMESpchWeight_max">100</string>
+    <string name="pref_SeekBarRMESpchWeight_default_value">100</string>
+    <string name="pref_SeekBarRMESpchWeight_title">Speech Weight</string>
+
+    <string name="pref_SeekBarRMESpkrWeight">pref_SeekBarRMESpkrWeight</string>
+    <string name="pref_SeekBarRMESpkrWeight_summary">Speaker Weight</string>
+    <string name="pref_SeekBarRMESpkrWeight_min">0</string>
+    <string name="pref_SeekBarRMESpkrWeight_max">100</string>
+    <string name="pref_SeekBarRMESpkrWeight_default_value">0</string>
+    <string name="pref_SeekBarRMESpkrWeight_title">Speaker Weight</string>
+
+    <string name="pref_SeekBarRMEFaceWeight">pref_SeekBarRMEFaceWeight</string>
+    <string name="pref_SeekBarRMEFaceWeight_summary">Face Weight</string>
+    <string name="pref_SeekBarRMEFaceWeight_min">0</string>
+    <string name="pref_SeekBarRMEFaceWeight_max">100</string>
+    <string name="pref_SeekBarRMEFaceWeight_default_value">0</string>
+    <string name="pref_SeekBarRMEFaceWeight_title">Face Weight</string>
+
+    <!-- Embedded Settings -->
+
+    <string name="pref_ListRMEAVAction">Action</string>
+    <string name="pref_ListRMEAVAction_dialog_title">Embedded Engine Action</string>
+    <string name="pref_ListRMEAVAction_default_value">transcribe</string>
+    <string name="pref_ListRMEAVAction_summary">Action: %s</string>
+
+    <string-array name="pref_ListRMEAVAction_entries">
+        <item>Transcribe Only</item>
+        <item>Segment, Identify Speaker, and Transcribe</item>
+    </string-array>
+
+    <string-array name="pref_ListRMEAVAction_entry_values">
+        <item>transcribe</item>
+        <item>segmenttranscribe</item>
+    </string-array>
+
+    <string name="pref_EditTextEmbeddedRootDir">Embedded Engine Root Dir</string>
+    <string name="pref_EditTextEmbeddedRootDir_summary">
+        Enter the location of Root Dir for the Embedded Engine.
+    </string>
+    <string name="pref_EditTextEmbeddedRootDir_default_value">/sdcard/rmeroot</string>
+
+    <string name="pref_EditTextEmbeddedUserID">Embedded Engine UserID</string>
+    <string name="pref_EditTextEmbeddedUserID_summary">
+        Enter the UserID used for the Embedded Engine.
+    </string>
+    <string name="pref_EditTextEmbeddedUserID_default_value">rmeeng16k16</string>
+
+    <string name="pref_ListRMESpchEmbeddedLanguage">Embedded Engine Language</string>
+    <string name="pref_ListRMESpchEmbeddedLanguage_dialog_title">Embedded Engine Languague</string>
+    <string name="pref_ListRMESpchEmbeddedLanguage_default_value">eng_us</string>
+    <string name="pref_ListRMESpchEmbeddedLanguage_summary">Language: %s</string>
+
+    <string-array name="pref_ListRMESpchEmbeddedLanguage_entries">
+        <item>English</item>
+        <item>Arabic - عربى</item>
+        <item>German - Deutsche</item>
+        <item>Mandarin Chinese - 中文</item>
+        <item>Bilingual English-Arabic</item>
+        <item>Bilingual English-German</item>
+        <item>Bilingual English-Mandarin</item>
+    </string-array>
+
+    <string-array name="pref_ListRMESpchEmbeddedLanguage_entry_values">
+        <item>eng_us</item>
+        <item>ara_gen</item>
+        <item>ger_de</item>
+        <item>chi_man</item>
+        <item>ara_gen_eng_us</item>
+        <item>ger_de_eng_us</item>
+        <item>chi_man_eng_us</item>
+    </string-array>
+
+
+    <string name="pref_ListRMESpchEmbeddedModelVersion">Speech Recognition Model Version</string>
+    <string name="pref_ListRMESpchEmbeddedModelVersion_dialog_title">Speech Recognition Model Version</string>
+    <string name="pref_ListRMESpchEmbeddedModelVersion_default_value">Medium</string>
+    <string name="pref_ListRMESpchEmbeddedModelVersion_summary">Speech Model Version: %s</string>
+
+    <string-array name="pref_ListRMESpchEmbeddedModelVersion_entries">
+        <item>Small (~350 MB)</item>
+        <item>Medium (~800 MB)</item>
+        <item>Large (~1.1 GB)</item>
+        <item>Huge  (~1.5 GB)</item>
+    </string-array>
+
+    <string-array name="pref_ListRMESpchEmbeddedModelVersion_entry_values">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Huge</item>
+    </string-array>
+
+    <string name="pref_ListRMEFaceEmbeddedDetectModelVersion">Image Detection Model Version</string>
+    <string name="pref_ListRMEFaceEmbeddedDetectModelVersion_dialog_title">Image detection Model Version</string>
+    <string name="pref_ListRMEFaceEmbeddedDetectModelVersion_default_value">Face</string>
+    <string name="pref_ListRMEFaceEmbeddedDetectModelVersion_summary">Image Detection Version: %s</string>
+
+    <string-array name="pref_ListRMEFaceEmbeddedDetectModelVersion_entries">
+        <item>Face Detection</item>
+        <item>Object Detection</item>
+    </string-array>
+
+    <string-array name="pref_ListRMEFaceEmbeddedDetectModelVersion_entry_values">
+        <item>Face</item>
+        <item>Object</item>
+    </string-array>
+
+
+
+
+    <string name="pref_ListRMEFaceEmbeddedRecoModelVersion">Image Recognition Model Version</string>
+    <string name="pref_ListRMEFaceEmbeddedRecoModelVersion_dialog_title">Image Recognition Model Version</string>
+    <string name="pref_ListRMEFaceEmbeddedRecoModelVersion_default_value">Face</string>
+    <string name="pref_ListRMEFaceEmbeddedRecoModelVersion_summary">Image Recognition Version: %s</string>
+
+    <string-array name="pref_ListRMEFaceEmbeddedRecoModelVersion_entries">
+        <item>Face Detection</item>
+  <!--      <item>Object Detection</item> -->
+    </string-array>
+
+    <string-array name="pref_ListRMEFaceEmbeddedRecoModelVersion_entry_values">
+        <item>Face</item>
+    <!--    <item>Object</item> -->
+    </string-array>
+
+
+
+
+
+
+
+    <string name="pref_SwitchEmbeddedDoEndpointing">Perform Endpointing</string>
+    <string name="pref_SwitchEmbeddedDoEndpointing_summary">
+      Tries to break up sentences according to pause.
+    </string>
+
+    <string name="pref_SwitchEmbeddedDoWordAlignment">Perform Word Alignment</string>
+    <string name="pref_SwitchEmbeddedDoWordAlignment_summary">
+      Return timestamps for each word in the final result for speech recognition.
+    </string>
+
+    <string name="pref_SwitchEmbeddedDoPhoneAlignment">Perform Phone Alignment</string>
+    <string name="pref_SwitchEmbeddedDoPhoneAlignment_summary">
+      Return timestamps for each Phoneme in the final result for speech recognition.
+    </string>
+
+    <!-- Client Server Settings -->
+
+    <string name="pref_EditTextServerAddress">Server Address:</string>
+    <string name="pref_EditTextServerAddress_summary">
+        Enter the fully qualified address of the server or its ip address.
+    </string>
+    <string name="pref_EditTextServerAddress_default_value">rmeav1.audiovisualreco.com</string>
+
+    <string name="pref_EditTextServerPort">Server Port:</string>
+    <string name="pref_EditTextServerPort_summary">
+        Enter the server port -- depends on the language.
+    </string>
+    <string name="pref_EditTextServerPort_default_value">17201</string>
+
+    <string name="pref_EditTextClientServerUserID">Client/Server Engine UserID</string>
+    <string name="pref_EditTextClientServerUserID_summary">
+        Enter the UserID used for the Client/Server Engine.
+    </string>
+    <string name="pref_EditTextClientServerUserID_default_value">rmeeng16k16</string>
+
+    <string name="pref_ListRMESpchClientServerLanguage">Client/Server Engine Language</string>
+    <string name="pref_ListRMESpchClientServerLanguage_dialog_title">Client/Server Engine Languague</string>
+    <string name="pref_ListRMESpchClientServerLanguage_default_value">eng_us</string>
+    <string name="pref_ListRMESpchClientServerLanguage_summary">Language: %s</string>
+
+    <string-array name="pref_ListRMESpchClientServerLanguage_entries">
+        <item>English</item>
+        <item>Arabic - عربى</item>
+        <item>German - Deutsche</item>
+        <item>Mandarin Chinese - 中文</item>
+        <item>Bilingual English-Arabic</item>
+        <item>Bilingual English-German</item>
+        <item>Bilingual English-Mandarin</item>
+    </string-array>
+
+    <string-array name="pref_ListRMESpchClientServerLanguage_entry_values">
+        <item>eng_us</item>
+        <item>ara_gen</item>
+        <item>ger_de</item>
+        <item>chi_man</item>
+        <item>ara_gen_eng_us</item>
+        <item>ger_de_eng_us</item>
+        <item>chi_man_eng_us</item>
+    </string-array>
+
+    <string name="pref_ListRMESpchClientServerModelVersion">Speech Recognition Model Version</string>
+    <string name="pref_ListRMESpchClientServerModelVersion_dialog_title">Speech Recognition Model Version</string>
+    <string name="pref_ListRMESpchClientServerModelVersion_default_value">Medium</string>
+    <string name="pref_ListRMESpchClientServerModelVersion_summary">Speech Model Version: %s</string>
+
+    <string-array name="pref_ListRMESpchClientServerModelVersion_entries">
+        <item>Small (~350 MB)</item>
+        <item>Medium (~800 MB)</item>
+        <item>Large (~1.1 GB)</item>
+        <item>Huge  (~1.5 GB)</item>
+    </string-array>
+
+    <string-array name="pref_ListRMESpchClientServerModelVersion_entry_values">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Huge</item>
+    </string-array>
+
+    <string name="pref_ListRMEFaceClientServerDetectModelVersion">Image Detect Model Version</string>
+    <string name="pref_ListRMEFaceClientServerDetectModelVersion_dialog_title">Image Detect Model Version</string>
+    <string name="pref_ListRMEFaceClientServerDetectModelVersion_default_value">Face</string>
+    <string name="pref_ListRMEFaceClientServerDetectModelVersion_summary">Image Detection Version: %s</string>
+
+    <string-array name="pref_ListRMEFaceClientServerDetectModelVersion_entries">
+        <item>Face</item>
+        <item>Object</item>
+    </string-array>
+
+    <string-array name="pref_ListRMEFaceClientServerDetectModelVersion_entry_values">
+        <item>Face</item>
+        <item>Object</item>
+    </string-array>
+
+    <string name="pref_ListRMEFaceClientServerRecoModelVersion">Image Recognition Model Version</string>
+    <string name="pref_ListRMEFaceClientServerRecoModelVersion_dialog_title">Image Recognition Model Version</string>
+    <string name="pref_ListRMEFaceClientServerRecoModelVersion_default_value">Face</string>
+    <string name="pref_ListRMEFaceClientServerRecoModelVersion_summary">Image Recognition Version: %s</string>
+
+    <string-array name="pref_ListRMEFaceClientServerRecoModelVersion_entries">
+        <item>Face</item>
+      <!--  <item>Object</item> -->
+    </string-array>
+
+    <string-array name="pref_ListRMEFaceClientServerRecoModelVersion_entry_values">
+        <item>Face</item>
+      <!--  <item>Object</item> -->
+    </string-array>
+
+
+    <string name="pref_ListRMESpchSamplingRate">Audio Sampling Rate</string>
+    <string name="pref_ListRMESpchSamplingRate_dialog_title">Audio Sampling Rate</string>
+    <string name="pref_ListRMESpchSamplingRate_default_value">16000</string>
+    <string name="pref_ListRMESpchSamplingRate_summary">Sampling Rate: %s</string>
+
+    <string-array name="pref_ListRMESpchSamplingRate_entries">
+        <!--      <item>8000 Hz</item>-->
+        <item>16000 Hz</item>
+    </string-array>
+
+    <string-array name="pref_ListRMESpchSamplingRate_entry_values">
+        <!--      <item>8000</item>-->
+        <item>16000</item>
+    </string-array>
+
+
+    <!-- About Resources -->
+    <string name="about_html_text"><![CDATA[
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML>
+
+<BODY TEXT="#000000" BGCOLOR="#ffffff">
+
+<table width="750">
+
+  <tr>
+    <td>
+      <img src="http://www.recotechnologies.com/images/2017_rti_banner_web.png" border=0 alt="RecoMadeEasy Embedded AudioVisual Recognition Engine by Recognition Technologies, Inc.">
+    </td>
+  </tr>
+
+
+  <tr>
+    <td>
+      <font color="#DC1404" size="+2">
+        RecoMadeEasy<sup>&reg;</sup>Embedded Engine
+      </font>
+    </td>
+  </tr>
+</table>
+
+<table width="750">
+  <tr><td>
+    <ul>
+<a name="audiovisualengine"></a>
+      <li>
+        <p>
+          <a href="index.php?RMESelection=audiovisual">AudioVisual Recognition</a><br>
+          <font size=-1>(Combination of Speaker, Speech, and Face Recognition with a single interface)</font><br>
+          <table width=350>
+            <tr><td>
+
+              <a href="index.php?RMESelection="><font size=-1>Embedded</font></a><br>
+
+            </td><td>
+
+              <a href="index.php?RMESelection=audiovisual/server"><font size=-1>Server Based</font></a><br>
+
+            </td></tr>
+          </table>
+
+                <font color="#0414DC">
+        RecoMadeEasy<sup>&reg;</sup><br>
+      </font>
+      <font color="#0414DC">
+        Embedded AudioVisual Recognition
+      </font>
+
+      <p>
+      <b>Platform:</b> <ul>Embedded, Standalone — See below for <a href="#supportedos">Supported Operating Systems and Devices</a>.  Also see our <a href="index.php?RMESelection=audiovisual/server">Server Based AudioVisual Recognition Engine</a>.</ul>
+      </p>
+      <p>
+<b>RecoMadeEasy<sup>&reg;</sup> Embedded AudioVisual Recognition</b> is an <it>embedded</it> natural language voice and video recognition engine that offers comprehensive conversational voice interaction, voice biometrics and facial recognition. The engine has a small memory footprint and is designed to run natively on devices that seek unconstrained natural language interfaces with high recognition accuracy in the presence of service interruption or when full, uninterrupted and secure access to a cloud server is not guaranteed.
+      </p>
+
+      <p>
+The <b>RecoMadeEasy<sup>&reg;</sup> AudioVisual Recognition</b> engine is comprised of three distinct technologies: <it>Speaker</it>, <it>Speech</it>, and <it>Facial</it> Recognition, which have been developed in our research labs in New York. When presented with an audio, video, or audio-video stream, the engine via the API returns the following in either <b>XML</b> or <b>JSON</b>:
+      <br>
+      <ol>
+        <li>Speaker Segmentation of Incoming Audio, Video, or Both (including timestamps of the location where the speakers change and tagging of each audio, video, or combined segment with the ID of the person speaking in that segment)</li>
+        <li>Standalone engine which may be used through a very simple
+            C++ SDK and API. This would be most useful for integrating
+            the engine into current products and IVR systems.</li>
+        <li>Audio and/or Visual Identification of speaker(s)</li>
+        <li>Audio and/or Visual Verification of speaker(s)</li>
+        <li>Full Transcription of the audio stream</li>
+      </ol>
+      </p>
+
+      <p>
+       The engine is built to allow users to speak naturally and be
+       understood – even in a far-field, noisy
+       environment. RecoMadeEasy<sup>&reg;</sup> is available as an SDK with an
+       included API that contains all necessary components for full
+       integration and enables engineers to get started easily and
+       without any work or costs for development.
+      </p>
+
+      <p>
+        The <b>RecoMadeEasy<sup>&reg;</sup> AudioVisual Reocgnition engine</b> is also available as a server-side and a standalone product.
+      </p>
+
+      <p>
+      <b>Speaker Recognition</b><br>
+      <ul>
+      <it>Language-</it> and <it>Text-Independence</it>: The speaker recognition system is completely text- and language-independent. This means that a user may enroll her/his voice into the system in one language and be identified or verified in a completely different language. This allows the engine to be able to handle authentication and identification processes across any number of languages.
+      </ul>
+      </p>
+
+      <p>
+      <b>Large-Vocabulary Speech Recognition</b><br>
+      <ul>
+      The speech recognition side of the engine provides one of the
+      most accurate transcriptions for English, handling many
+      different dialects and accents in a single large-vocabulary
+      transcription engine, It is also capable of providing real-time
+      processing in a small memory footprint.<br><br>
+      The speech recognition uses a streaming interface where the
+      recognizer, in the form of listeners and the client, both run on
+      the embedded device. Any light generic client capable of using a
+      websocket interface may stream audio/video to a listener and get
+      back real-time results of the transcript with optional
+      alternative results, including likelihood scores in any codec
+      that is supported by GStreamer-1.0, including MP3, Ogg Vorbis,
+      Free Lossless Audio Codec (FLAC), MP4, Pulse Code Modulation
+      (PCM), or other codecs such as those supported by a standard
+      Waveform Audio File Format (WAVE).
+      </ul>
+      </p>
+
+      <p>
+      <b>Face Recognition</b><br>
+      <ul>
+      The facial recognition side of the engine provides face
+      detection, face identification (open-set and closed-set), and
+      facial verification from still images and video streams.  It
+      supports all standard image and video formats such as png, jpeg,
+      gif, mp2, mp4, .mov, etc.
+      </ul>
+      </p>
+
+<a name="supportedos"></a>
+      <p>
+      <b>Supported Operating Systems</b><br>
+      </p>
+      <ul>
+        The RecoMadeEasy<sup>&reg;</sup> Embedded AudioVisual
+        Recognigtion engine is available for the following operating
+        systems.  The C++ SDK, command-line interface, and web
+        services may be used in any of the following systems:
+      </ul>
+      <p>
+      <i>Embedded Operating Systems:</i><br>
+      <ul>
+        <li><b>Fedora 25 Linux arm7vl and soon: Fedora 26 aarch64 <font color="#dc1404">(Latest)</font></b></li>
+
+        <li><b>Ubuntu 18.04 Mate Linux (aarch64)<font color="#dc1404">(Latest)</font></b></li><br>
+      </ul>
+      </p>
+
+
+       </p>
+      </li>
+
+
+
+
+<a name="spkrengine"></a>
+      <li>
+        <p>
+          <a href="index.php?RMESelection=spkr#spkrengine">Speaker Recognition</a><br>
+          <font size=-1>(Language- and Text-Independent, aka: Speaker Biometrics, Voice Biometrics, or SIV)</font><br>
+          <a href="http://www.recotechnologies.com/products/frost/index.html" target="_blank"><font size=-1><i>Recipient: Frost & Sullivan Award 2011</i></font></a><br>
+          <table width=350>
+            <tr><td>
+
+              <a href="index.php?RMESelection=spkr/embedded#spkrengine"><font size=-1>Embedded</font></a><br>
+
+            </td><td>
+
+              <a href="index.php?RMESelection=spkr/server#spkrengine"><font size=-1>Server Based</font></a><br>
+
+            </td></tr>
+          </table>
+
+
+       </p>
+      </li>
+
+
+
+
+<a name="spchengine"></a>
+      <li>
+        <p>
+          <a href="index.php?RMESelection=spch#spchengine">Large-Vocabulary Speech Recognition</a><br>
+          <font size=-1>Available for English, Mandarin, Arabic, and German</font><br>
+          <font size=-1>Also Available in Bilingual Mandarin-English, Arabic-English, and German-English</font><br>
+          <font size=-1>(Customizable domain full transcription ~ 240,000+ word vocabulary)</font><br>
+          <table width=350>
+            <tr><td>
+
+              <a href="index.php?RMESelection=spch/embedded#spchengine"><font size=-1>Embedded</font></a><br>
+
+            </td><td>
+
+              <a href="index.php?RMESelection=spch/server#spchengine"><font size=-1>Server Based</font></a><br>
+
+            </td></tr>
+          </table>
+
+
+       </p>
+      </li>
+
+
+
+<a name="faceengine"></a>
+      <li>
+        <p>
+          <a href="index.php?RMESelection=face#faceengine">Face Recognition</a><br>
+          <font size=-1>(face detection and recognition)</font><br>
+          <table width=350>
+            <tr><td>
+
+              <a href="index.php?RMESelection=face/embedded#faceengine"><font size=-1>Embedded</font></a><br>
+
+            </td><td>
+
+              <a href="index.php?RMESelection=face/server#faceengine"><font size=-1>Server Based</font></a><br>
+
+            </td></tr>
+          </table>
+
+
+       </p>
+      </li>
+
+
+<a name="ivrengine"></a>
+      <li>
+        <p>
+          <a href="index.php?RMESelection=ivr#ivrengine">Interactive Voice Response (IVR)</a><br>
+          <font size=-1>(Graph-based logic, easily configured)</font><br>
+          <table width=350>
+            <tr><td colspan=2>
+
+              <a href="index.php?RMESelection=ivr/details#ivrengine"><font size=-1>Product Details</font></a><br>
+
+
+            </td></tr>
+          </table>
+
+
+       </p>
+      </li>
+
+<a name="alprengine"></a>
+      <li>
+        <p>
+          <a href="index.php?RMESelection=alpr#alprengine">Automatic Language Proficiency Rating (ALPR)</a><br>
+          <font size=-1>(Multi-lingual automated language proficiency rating)</font><br>
+
+
+       </p>
+      </li>
+
+<a name="signengine"></a>
+      <li>
+        <p>
+          <a href="index.php?RMESelection=sign#signengine">Signature Recognition</a><br>
+          <font size=-1>Status: Advanced Development Stage</font><br>
+
+
+       </p>
+      </li>
+
+<a name="keysengine"></a>
+      <li>
+        <p>
+          <a href="index.php?RMESelection=keys#keysengine">Keystroke Recognition</a><br>
+          <font size=-1>Status: Research Stage</font><br>
+
+
+       </p>
+      </li>
+
+    </ul>
+
+  <hr></FONT></P>
+
+
+</td></tr>
+</table>
+
+<table width="725">
+  <tr>
+    <td colspan=2>
+      For further information please contact us at 1-800-215-0841 inside the
+      U.S. or +1-914-997-5676 from any other country.  Alternatively, you may
+      send an Email to <a href="mailto:info@recotechnologies.com">
+      <i>info@recotechnologies.com</i></a>.
+
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="mailto:info@recotechnologies.com">
+        <font size=-1><i>info@recotechnologies.com</i></font>
+      </a>
+    </td>
+
+    <td align=right>
+      <a href="http://www.recotechnologies.com">
+        <font size=-1><i>Recognition Technologies, Inc.</i></font>
+      </a>
+    </td>
+  </tr>
+</table>
+
+</BODY>
+</HTML>
+
+    ]]></string>
+
+    <!-- SpeakerEnroll Resources -->
+
+    <string name="SpeakerEnrollInstructions">Please Enter a Unique ID and Your full Name:</string>
+
+    <string name="SpeakerUnenrollInstructions">Please Enter a Unique ID:</string>
+
+    <string name="speaker_enroll_html_text"><![CDATA[
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML>
+
+<BODY TEXT="#000000" BGCOLOR="#ffffff">
+
+<table border=2>
+  <tr>
+    <td>
+
+ <font size=+1>
+ Twain was raised in Hannibal, Missouri, which later provided the
+ setting for Tom Sawyer and Huckleberry Finn. He served an
+ apprenticeship with a printer and then worked as a typesetter,
+ contributing articles to the newspaper of his older brother Orion
+ Clemens. He later became a riverboat pilot on the Mississippi River
+ before heading west to join Orion in Nevada. He referred humorously
+ to his lack of success at mining, turning to journalism for the
+ Virginia City Territorial Enterprise. His humorous story, &#34;The
+ Celebrated Jumping Frog of Calaveras County&#34;, was published in 1865,
+ based on a story that he heard at Angels Hotel in Angels Camp,
+ California, where he had spent some time as a miner. The short story
+ brought international attention and was even translated into
+ French. His wit and satire, in prose and in speech, earned praise
+ from critics and peers, and he was a friend to presidents, artists,
+ industrialists, and European royalty.
+ </font>
+
+    </td>
+  </tr>
+
+</table>
+
+</BODY>
+</HTML>
+
+    ]]></string>
+
+
+</resources>

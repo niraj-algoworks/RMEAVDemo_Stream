@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SpeakerEnrollActivity">
+
+    <TextView
+        android:id="@+id/textViewDialogEnrollClaimedIDInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:singleLine="false"
+        android:textColor="@color/colorDarkRed"
+        android:text="@string/SpeakerEnrollInstructions"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textIsSelectable="false"
+        android:textSize="18sp"
+        app:autoSizeTextType="uniform" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputDialogEnrollClaimedID"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="0dp"
+            android:hint="Unique Claimed ID"
+            android:inputType="text"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputDialogEnrollClassDescription"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="0dp"
+            android:hint="Full Name of Speaker"
+            android:inputType="textPersonName|text"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Switch
+        android:id="@+id/switchInputDialogEnrollSpeaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enroll Speaker"
+        android:checked="true" />
+
+    <Switch
+        android:id="@+id/switchInputDialogEnrollFace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enroll Face"
+        android:checked="false" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

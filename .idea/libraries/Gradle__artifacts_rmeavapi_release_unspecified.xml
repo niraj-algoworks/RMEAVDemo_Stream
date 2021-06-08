@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: artifacts:rmeavapi-release:unspecified">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/rmeavapi-release/build/.transforms/badaec49242c97414b943418060a5927/jetified-rmeavapi-release/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/rmeavapi-release/build/.transforms/badaec49242c97414b943418060a5927/jetified-rmeavapi-release/res" />
+      <root url="file://$PROJECT_DIR$/rmeavapi-release/build/.transforms/badaec49242c97414b943418060a5927/jetified-rmeavapi-release/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/rmeavapi-release/build/.transforms/636a79c587593cd20a4665d0beed42c4/jetified-rmeavapi-release/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/rmeavapi-release/build/.transforms/636a79c587593cd20a4665d0beed42c4/jetified-rmeavapi-release/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/rmeavapi-release/build/.transforms/636a79c587593cd20a4665d0beed42c4/jetified-rmeavapi-release/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

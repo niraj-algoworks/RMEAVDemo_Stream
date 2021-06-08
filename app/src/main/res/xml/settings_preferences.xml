@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+  <PreferenceCategory
+    android:title="@string/pref_CategoryEngine">
+  </PreferenceCategory>
+
+  <SwitchPreferenceCompat
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:defaultValue="true"
+      android:key="pref_SwitchEmbeddedEngine"
+      android:summary="@string/pref_SwitchEmbeddedEngine_summary"
+      android:title="@string/pref_SwitchEmbeddedEngine" />
+
+  <ListPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_ListCameraLensDirection"
+      android:entries="@array/pref_ListCameraLensDirection_entries"
+      android:entryValues="@array/pref_ListCameraLensDirection_entry_values"
+      android:defaultValue="@string/pref_ListCameraLensDirection_default_value"
+      android:summary="@string/pref_ListCameraLensDirection_summary"
+      android:title="@string/pref_ListCameraLensDirection" />
+
+  <SeekBarPreference
+      android:key="pref_SeekBarRMESpchWeight"
+      android:id="@+id/prefid_SeekBarRMESpchWeight"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:min="0"
+      android:max="100"
+      android:defaultValue="@string/pref_SeekBarRMESpchWeight_default_value"
+      android:summary="@string/pref_SeekBarRMESpchWeight_summary"
+      android:title="@string/pref_SeekBarRMESpchWeight_title" />
+
+    <SeekBarPreference
+      android:key="pref_SeekBarRMESpkrWeight"
+      android:id="@+id/pref_SeekBarRMESpkrWeight"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:min="0"
+      android:max="100"
+      android:defaultValue="@string/pref_SeekBarRMESpkrWeight_default_value"
+      android:summary="@string/pref_SeekBarRMESpkrWeight_summary"
+      android:title="@string/pref_SeekBarRMESpkrWeight_title" />
+
+    <SeekBarPreference
+      android:key="pref_SeekBarRMEFaceWeight"
+      android:id="@+id/pref_SeekBarRMEFaceWeight"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:min="0"
+      android:max="100"
+      android:defaultValue="@string/pref_SeekBarRMEFaceWeight_default_value"
+      android:summary="@string/pref_SeekBarRMEFaceWeight_summary"
+      android:title="@string/pref_SeekBarRMEFaceWeight_title" />
+
+  <PreferenceCategory
+    android:title="@string/pref_CategoryEngineEmbedded">
+  </PreferenceCategory>
+
+  <ListPreference
+      android:dependency="pref_SwitchEmbeddedEngine"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_ListRMEAVAction"
+      android:entries="@array/pref_ListRMEAVAction_entries"
+      android:entryValues="@array/pref_ListRMEAVAction_entry_values"
+      android:defaultValue="@string/pref_ListRMEAVAction_default_value"
+      android:summary="@string/pref_ListRMEAVAction_summary"
+      android:title="@string/pref_ListRMEAVAction"
+      android:dialogTitle="@string/pref_ListRMEAVAction"
+ />
+
+  <EditTextPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_EditTextEmbeddedRootDir"
+      android:defaultValue="@string/pref_EditTextEmbeddedRootDir_default_value"
+      android:summary="@string/pref_EditTextEmbeddedRootDir_summary"
+      android:title="@string/pref_EditTextEmbeddedRootDir" />
+
+  <EditTextPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_EditTextEmbeddedUserID"
+      android:defaultValue="@string/pref_EditTextEmbeddedUserID_default_value"
+      android:summary="@string/pref_EditTextEmbeddedUserID_summary"
+      android:title="@string/pref_EditTextEmbeddedUserID" />
+
+  <ListPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_ListRMESpchEmbeddedLanguage"
+      android:entries="@array/pref_ListRMESpchEmbeddedLanguage_entries"
+      android:entryValues="@array/pref_ListRMESpchEmbeddedLanguage_entry_values"
+      android:defaultValue="@string/pref_ListRMESpchEmbeddedLanguage_default_value"
+      android:summary="@string/pref_ListRMESpchEmbeddedLanguage_summary"
+      android:title="@string/pref_ListRMESpchEmbeddedLanguage" />
+ />
+
+  <ListPreference
+      android:dependency="pref_SwitchEmbeddedEngine"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_ListRMESpchEmbeddedModelVersion"
+      android:entries="@array/pref_ListRMESpchEmbeddedModelVersion_entries"
+      android:entryValues="@array/pref_ListRMESpchEmbeddedModelVersion_entry_values"
+      android:defaultValue="@string/pref_ListRMESpchEmbeddedModelVersion_default_value"
+      android:summary="@string/pref_ListRMESpchEmbeddedModelVersion_summary"
+      android:title="@string/pref_ListRMESpchEmbeddedModelVersion"
+      android:dialogTitle="@string/pref_ListRMESpchEmbeddedModelVersion"
+ />
+
+  <ListPreference
+      android:dependency="pref_SwitchEmbeddedEngine"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_ListRMEFaceEmbeddedDetectModelVersion"
+      android:entries="@array/pref_ListRMEFaceEmbeddedDetectModelVersion_entries"
+      android:entryValues="@array/pref_ListRMEFaceEmbeddedDetectModelVersion_entry_values"
+      android:defaultValue="@string/pref_ListRMEFaceEmbeddedDetectModelVersion_default_value"
+      android:summary="@string/pref_ListRMEFaceEmbeddedDetectModelVersion_summary"
+      android:title="@string/pref_ListRMEFaceEmbeddedDetectModelVersion"
+      android:dialogTitle="@string/pref_ListRMEFaceEmbeddedDetectModelVersion"
+ />
+
+    <ListPreference
+        android:dependency="pref_SwitchEmbeddedEngine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:key="pref_ListRMEFaceEmbeddedRecoModelVersion"
+        android:entries="@array/pref_ListRMEFaceEmbeddedRecoModelVersion_entries"
+        android:entryValues="@array/pref_ListRMEFaceEmbeddedRecoModelVersion_entry_values"
+        android:defaultValue="@string/pref_ListRMEFaceEmbeddedRecoModelVersion_default_value"
+        android:summary="@string/pref_ListRMEFaceEmbeddedRecoModelVersion_summary"
+        android:title="@string/pref_ListRMEFaceEmbeddedRecoModelVersion"
+        android:dialogTitle="@string/pref_ListRMEFaceEmbeddedRecoModelVersion"
+        />
+
+
+    <SwitchPreferenceCompat
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:defaultValue="true"
+      android:key="pref_SwitchEmbeddedDoEndpointing"
+      android:summary="@string/pref_SwitchEmbeddedDoEndpointing_summary"
+      android:title="@string/pref_SwitchEmbeddedDoEndpointing" />
+
+  <SwitchPreferenceCompat
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:defaultValue="false"
+      android:key="pref_SwitchEmbeddedDoWordAlignment"
+      android:summary="@string/pref_SwitchEmbeddedDoWordAlignment_summary"
+      android:title="@string/pref_SwitchEmbeddedDoWordAlignment" />
+
+  <SwitchPreferenceCompat
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:defaultValue="false"
+      android:key="pref_SwitchEmbeddedDoPhoneAlignment"
+      android:summary="@string/pref_SwitchEmbeddedDoPhoneAlignment_summary"
+      android:title="@string/pref_SwitchEmbeddedDoPhoneAlignment" />
+
+  <PreferenceCategory
+    android:title="@string/pref_CategoryEngineClientServer">
+  </PreferenceCategory>
+
+  <EditTextPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_EditTextServerAddress"
+      android:defaultValue="@string/pref_EditTextServerAddress_default_value"
+      android:summary="@string/pref_EditTextServerAddress_summary"
+      android:title="@string/pref_EditTextServerAddress" />
+
+  <EditTextPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_EditTextServerPort"
+      android:summary="@string/pref_EditTextServerPort_summary"
+      android:defaultValue="@string/pref_EditTextServerPort_default_value"
+      android:title="@string/pref_EditTextServerPort" />
+  
+  <EditTextPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_EditTextClientServerUserID"
+      android:defaultValue="@string/pref_EditTextClientServerUserID_default_value"
+      android:summary="@string/pref_EditTextClientServerUserID_summary"
+      android:title="@string/pref_EditTextClientServerUserID" />
+
+  <ListPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_ListRMESpchClientServerLanguage"
+      android:entries="@array/pref_ListRMESpchClientServerLanguage_entries"
+      android:entryValues="@array/pref_ListRMESpchClientServerLanguage_entry_values"
+      android:defaultValue="@string/pref_ListRMESpchClientServerLanguage_default_value"
+      android:summary="@string/pref_ListRMESpchClientServerLanguage_summary"
+      android:title="@string/pref_ListRMESpchClientServerLanguage" />
+ />
+
+
+  <ListPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_ListRMESpchClientServerModelVersion"
+      android:entries="@array/pref_ListRMESpchClientServerModelVersion_entries"
+      android:entryValues="@array/pref_ListRMESpchClientServerModelVersion_entry_values"
+      android:defaultValue="@string/pref_ListRMESpchClientServerModelVersion_default_value"
+      android:summary="@string/pref_ListRMESpchClientServerModelVersion_summary"
+      android:title="@string/pref_ListRMESpchClientServerModelVersion"
+      android:dialogTitle="@string/pref_ListRMESpchClientServerModelVersion"
+ />
+
+  <ListPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_ListRMEFaceClientServerDetectModelVersion"
+      android:entries="@array/pref_ListRMEFaceClientServerDetectModelVersion_entries"
+      android:entryValues="@array/pref_ListRMEFaceClientServerDetectModelVersion_entry_values"
+      android:defaultValue="@string/pref_ListRMEFaceClientServerDetectModelVersion_default_value"
+      android:summary="@string/pref_ListRMEFaceClientServerDetectModelVersion_summary"
+      android:title="@string/pref_ListRMEFaceClientServerDetectModelVersion"
+      android:dialogTitle="@string/pref_ListRMEFaceClientServerDetectModelVersion"
+ />
+
+  <ListPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_ListRMEFaceClientServerRecoModelVersion"
+      android:entries="@array/pref_ListRMEFaceClientServerRecoModelVersion_entries"
+      android:entryValues="@array/pref_ListRMEFaceClientServerRecoModelVersion_entry_values"
+      android:defaultValue="@string/pref_ListRMEFaceClientServerRecoModelVersion_default_value"
+      android:summary="@string/pref_ListRMEFaceClientServerRecoModelVersion_summary"
+      android:title="@string/pref_ListRMEFaceClientServerRecoModelVersion"
+      android:dialogTitle="@string/pref_ListRMEFaceClientServerRecoModelVersion"
+      />
+
+
+    <PreferenceCategory
+    android:title="@string/pref_CategoryEngineCommonAudio">
+  </PreferenceCategory>
+
+  <ListPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:key="pref_ListRMESpchSamplingRate"
+      android:entries="@array/pref_ListRMESpchSamplingRate_entries"
+      android:entryValues="@array/pref_ListRMESpchSamplingRate_entry_values"
+      android:defaultValue="@string/pref_ListRMESpchSamplingRate_default_value"
+      android:summary="@string/pref_ListRMESpchSamplingRate_summary"
+      android:title="@string/pref_ListRMESpchSamplingRate" />
+ />
+
+<!--
+  <TextView
+      android:id="@+id/prefid_TextViewRMESpchWeight"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="0%"
+      android:textSize="30sp" />
+
+  <ProgressBar
+    android:id="@+id/prefid_ProgressBarRMESpchWeight"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="?android:attr/progressBarStyleHorizontal"
+    />
+-->
+
+<!--
+  <MultiSelectListPreference
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:key="pref_MultiSelectListPreference"
+    android:entries="@array/pref_ListRMESpchModelSize_entries"
+    app:entryValues="@array/pref_ListRMESpchModelSize_entry_values"
+    android:dialogTitle="@string/pref_MultiSelectListPreference"
+      />
+
+  <CheckBoxPreference
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:defaultValue="true"
+      android:key="pref_CheckBoxEmbeddedEngine"
+      android:summary="@string/pref_CheckBoxEmbeddedEngine_summary"
+      android:title="@string/pref_CheckBoxEmbeddedEngine" />
+-->
+</PreferenceScreen>

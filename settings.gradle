@@ -1,0 +1,3 @@
+include ':rmeavapi-release'
+include ':app'
+rootProject.name='RMEAVDemo'

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".MainActivity">
+
+  <include
+    android:id="@+id/toolbar"
+    layout="@layout/toolbar"
+    tools:layout_editor_absoluteX="-133dp"
+    tools:layout_editor_absoluteY="-16dp" />
+
+  <Spinner
+    android:id="@+id/spinnerAction"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textViewState" />
+
+  <Button
+      android:id="@+id/btnAction"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/btnAction"
+      app:layout_constraintEnd_toStartOf="@+id/btnStop"
+      app:layout_constraintHorizontal_bias="0.497"
+      app:layout_constraintStart_toEndOf="@+id/spinnerAction"
+      app:layout_constraintTop_toBottomOf="@+id/textViewState" />
+
+  <Button
+    android:id="@+id/btnStop"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/btnStop"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textViewState" />
+
+  <TextView
+      android:id="@+id/textViewState"
+      android:layout_width="0dp"
+      android:layout_height="32dp"
+      android:layout_marginTop="16dp"
+      android:layout_weight="0.03"
+      android:text="Medium Text"
+      android:textAlignment="center"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="@id/btnAction"
+      app:layout_constraintHorizontal_bias="1.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+
+  <LinearLayout
+      android:id="@+id/cameraLinearLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnStop"
+      android:orientation="horizontal">
+
+    <!--        app:layout_constraintTop_toBottomOf="@+id/toolbar"-->
+    <FrameLayout
+        android:id="@+id/cameracontainer"
+        android:layout_width="190dp"
+        android:layout_height="256dp"
+        android:layout_marginTop="0dp"
+        android:background="#fff"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView"
+        app:layout_constraintHorizontal_bias="0.033"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:context="package com.recotechnologies.rmeavapp.MainActivity" />
+
+    <TextView
+        android:id="@+id/textViewImageResults"
+        android:layout_width="0dp"
+        android:layout_height="238dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="0.03"
+        android:text="Image Results"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+  </LinearLayout>
+
+  <ScrollView
+      android:id="@+id/scrollView"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:layout_weight="0.94"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/cameraLinearLayout"
+      tools:ignore="UselessParent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+      <!-- you can change the visibility from gone to visible
+           in the java code when the face weight is more than 0.0 -->
+ <!--
+      <ProgressBar
+        android:id="@+id/progressBarVideoIdentify"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/videodoneIden"
+        android:max="1000"
+        android:visibility="visible"
+        tools:visibility="visible" />
+-->
+
+      <!-- you can change the visibility from gone to visible
+           in the java code when the face weight is more than 0.0 -->
+
+      <!--
+      <TextureView
+        android:id="@+id/textureViewIdentify"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:layout_below="@+id/progressBarVideoIdentify"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        tools:visibility="visible" />
+      -->
+      <!--
+      <FrameLayout
+        android:id="@+id/cameracontainer"
+        android:layout_width="190dp"
+        android:layout_height="256dp"
+        android:layout_marginTop="0dp"
+        android:background="#fff"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView"
+        app:layout_constraintHorizontal_bias="0.033"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:context="package com.recotechnologies.rmeavapp.MainActivity" />
+-->
+
+      <TextView
+          android:id="@+id/textViewConsole"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:maxLines="1000"
+          android:singleLine="false"
+          android:textAppearance="?android:attr/textAppearanceMedium"
+          android:textIsSelectable="true"
+          android:textSize="16sp"
+          app:autoSizeTextType="uniform"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/cameraLinearLayout" />
+
+    </LinearLayout>
+  </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
